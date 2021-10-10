@@ -9,6 +9,7 @@ class AdminCreateUserForm (FlaskForm):
     """
     : Form for admin to create new users
     """
+<<<<<<< HEAD
     user_role = SelectField("User Role", choices=[
         "Admin",
         "Doctor",
@@ -25,8 +26,11 @@ class AdminCreateUserForm (FlaskForm):
         validators.DataRequired()
     ])
     email = StringField ("Email Address", validators=[
+=======
+    username = StringField ("Username", validators=[
+>>>>>>> eb33ede (Database Model and Schemas Updated)
         validators.DataRequired(),
-        validators.Length(min=4, max=50)
+        validators.Length(max=20)
     ])
     mobile = TelField ("Phone Number (8-digits without country code)", validators=[
         validators.DataRequired(),

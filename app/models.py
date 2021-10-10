@@ -6,8 +6,8 @@ from app import db, login
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 class User (UserMixin, db.Model):
+<<<<<<< HEAD
     """
     : Base User Model and Schema for Admin, Doctor, Patient, Pharmacist
     """
@@ -34,6 +34,14 @@ class User (UserMixin, db.Model):
             'role': self.role,
             'status': self.activated
         }
+=======
+    __tablename__ = 'user'
+    id = db.Column (db.Integer, primary_key=True)
+    username = db.Column (db.String(20), unique=True)
+    password = db.Column (db.String(50))
+    role = db.Column (db.String(10))
+    activated = db.Column (db.Boolean, default=False)
+>>>>>>> eb33ede (Database Model and Schemas Updated)
 
     def set_password(self, pwd: str):
         """
@@ -116,11 +124,16 @@ def load_user(id: int) -> object:
     return User.query.get (id)
 
 
+<<<<<<< HEAD
 class Patient (User):
+=======
+class Patient (User, db.Model):
+>>>>>>> eb33ede (Database Model and Schemas Updated)
     __tablename__ = 'patient'
     pat_id = db.Column (db.Integer, primary_key=True)
     fName = db.Column (db.String(100))
     lName = db.Column (db.String(100))
+<<<<<<< HEAD
     mobile = db.Column (db.String(16), nullable=False)
     gender = db.Column (db.String(8))
     email = db.Column (db.String(100), unique=True)
@@ -133,10 +146,19 @@ class Patient (User):
     __mapper_args__ = {
         'polymorphic_identity': 'patient'
     }
+=======
+    # gender = db.Column (db.String(8))
+    # email = db.Column (db.String(100), unique=True)
+    # dob = db.Column (db.DateTime, nullable=False)
+    account = db.relationship (User, backref=db.backref('patient_account'), uselist=False)
+    acc_id = db.Column(db.ForeignKey(User.id))
+
+>>>>>>> eb33ede (Database Model and Schemas Updated)
 
     def __repr__(self):
         return 'Patient: {}'.format(self.lName)
 
+<<<<<<< HEAD
     @classmethod
     def delete_patient(cls, acc_id):
         try:
@@ -166,10 +188,15 @@ class Allergy (db.Model):
     """
     : Patient_Allergy Model and Schema
     """
+=======
+
+class Allergy (db.Model):
+>>>>>>> eb33ede (Database Model and Schemas Updated)
     __tablename__ = 'allergy'
     allergy_id = db.Column (db.Integer, primary_key=True)
     allergy = db.Column (db.String(100))
     pat_id = db.Column (db.ForeignKey(Patient.pat_id))
+<<<<<<< HEAD
     patient = db.relationship (Patient, backref=db.backref('patient_allergy'), uselist=False)
 
 
@@ -218,10 +245,17 @@ class Doctor (User):
     """
     : Docter Model and Schema
     """
+=======
+    patient = db.relationship (Patient, backref=db.backref('patient'), uselist=True)
+
+
+class Doctor (User, db.Model):
+>>>>>>> eb33ede (Database Model and Schemas Updated)
     __tablename__ = 'doctor'
     doc_id = db.Column (db.Integer, primary_key=True)
     fName = db.Column (db.String(100), nullable=False)
     lName = db.Column (db.String(100), nullable=False)
+<<<<<<< HEAD
     mobile = db.Column (db.String(16), nullable=False)
     gender = db.Column (db.String(8))
     email = db.Column (db.String(100), unique=True)
@@ -231,11 +265,18 @@ class Doctor (User):
     __mapper_args__ = {
         'polymorphic_identity': 'doctor'
     }
+=======
+    # gender = db.Column (db.String(8))
+    # email = db.Column (db.String(100), unique=True)
+    account = db.relationship (User, backref=db.backref('doctor_account'), uselist=False)
+    acc_id = db.Column(db.ForeignKey(User.id))
+>>>>>>> eb33ede (Database Model and Schemas Updated)
 
     def __repr__(self):
         return 'Doctor: {}'.format(self.lName)
 
 
+<<<<<<< HEAD
     def getIssuedPrescriptions(self):
         return [
                   {
@@ -311,10 +352,14 @@ class Pharmacist (User):
     """
     : Pharmacist Model and Schema
     """
+=======
+class Pharmacist (User, db.Model):
+>>>>>>> eb33ede (Database Model and Schemas Updated)
     __tablename__ = 'pharmacist'
     phar_id = db.Column (db.Integer, primary_key=True)
     fName = db.Column (db.String(100), nullable=False)
     lName = db.Column (db.String(100), nullable=False)
+<<<<<<< HEAD
     mobile = db.Column (db.String(16), nullable=False)
     gender = db.Column (db.String(8))
     email = db.Column (db.String(100), unique=True)
@@ -324,11 +369,18 @@ class Pharmacist (User):
     __mapper_args__ = {
         'polymorphic_identity': 'pharmacist'
     }
+=======
+    # gender = db.Column (db.String(8))
+    # email = db.Column (db.String(100), unique=True)
+    account = db.relationship (User, backref=db.backref('pharmacist_account'), uselist=False)
+    acc_id = db.Column(db.ForeignKey(User.id))
+>>>>>>> eb33ede (Database Model and Schemas Updated)
 
     def __repr__(self):
         return 'Pharmacist: {}'.format(self.lName)
 
 
+<<<<<<< HEAD
     @classmethod
     def get_pharmacist_by_id(cls, id):
         return cls.query.filter_by(phar_id=id).first()
@@ -344,6 +396,8 @@ class Pharmacist (User):
             raise(e)
 
 
+=======
+>>>>>>> eb33ede (Database Model and Schemas Updated)
 class Medicine (db.Model):
     """
     : Medicine Model and Schema
@@ -356,6 +410,7 @@ class Medicine (db.Model):
     description = db.Column (db.String(256))
     instructions = db.Column (db.String(256))
     quantity = db.Column (db.Integer, default=0)
+<<<<<<< HEAD
 
 
 class Prescription (db.Model):
@@ -375,3 +430,5 @@ class Prescription (db.Model):
     pat_id = db.Column (db.ForeignKey(Patient.pat_id))
     phar_id = db.Column (db.ForeignKey(Pharmacist.phar_id))
     med_id = db.Column (db.ForeignKey(Medicine.med_id))
+=======
+>>>>>>> eb33ede (Database Model and Schemas Updated)
