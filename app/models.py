@@ -43,6 +43,9 @@ class User (UserMixin, db.Model):
     activated = db.Column (db.Boolean, default=False)
 >>>>>>> eb33ede (Database Model and Schemas Updated)
 
+    def __repr__(self):
+        return '<User> id: {}, username: {}'.format(self.id, self.username)
+
     def set_password(self, pwd: str):
         """
         : Hash Password and Store in DB
@@ -61,6 +64,7 @@ class User (UserMixin, db.Model):
         """
         : Add user to database
         """
+<<<<<<< HEAD
         print ('registering new user', self)
         db.session.add(self)
         db.session.commit()
@@ -115,6 +119,18 @@ class User (UserMixin, db.Model):
     def get_all_users (cls):
         return cls.query.all()
 
+=======
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_user_by_username (cls, username: str) -> object:
+        """
+        : Get User Object by username
+        """
+        return cls.query.filter_by(username=username).frist()
+
+>>>>>>> cc46499 (Authentication updated with new models and schemas')
 
 @login.user_loader
 def load_user(id: int) -> object:
@@ -134,6 +150,7 @@ class Patient (User, db.Model):
     fName = db.Column (db.String(100))
     lName = db.Column (db.String(100))
 <<<<<<< HEAD
+<<<<<<< HEAD
     mobile = db.Column (db.String(16), nullable=False)
     gender = db.Column (db.String(8))
     email = db.Column (db.String(100), unique=True)
@@ -147,12 +164,16 @@ class Patient (User, db.Model):
         'polymorphic_identity': 'patient'
     }
 =======
+=======
+    mobile = db.Column (db.String(16), nullable=False)
+>>>>>>> cc46499 (Authentication updated with new models and schemas')
     # gender = db.Column (db.String(8))
-    # email = db.Column (db.String(100), unique=True)
+    email = db.Column (db.String(100), unique=True)
     # dob = db.Column (db.DateTime, nullable=False)
     account = db.relationship (User, backref=db.backref('patient_account'), uselist=False)
     acc_id = db.Column(db.ForeignKey(User.id))
 
+<<<<<<< HEAD
 >>>>>>> eb33ede (Database Model and Schemas Updated)
 
     def __repr__(self):
@@ -168,11 +189,19 @@ class Patient (User, db.Model):
         except Exception as e:
             raise(e)
 
+=======
+    def __repr__(self):
+        return 'Patient: {}'.format(self.lName)
+
+>>>>>>> cc46499 (Authentication updated with new models and schemas')
     def save(self):
         """
         : Save Patient to database
         """
+<<<<<<< HEAD
         print ('saving patient data', self)
+=======
+>>>>>>> cc46499 (Authentication updated with new models and schemas')
         db.session.add(self)
         db.session.commit()
 
@@ -184,11 +213,14 @@ class Patient (User, db.Model):
         return Patient.query.filter_by (email=email)
 
 
+<<<<<<< HEAD
 class Allergy (db.Model):
     """
     : Patient_Allergy Model and Schema
     """
 =======
+=======
+>>>>>>> cc46499 (Authentication updated with new models and schemas')
 
 class Allergy (db.Model):
 >>>>>>> eb33ede (Database Model and Schemas Updated)
@@ -256,6 +288,7 @@ class Doctor (User, db.Model):
     fName = db.Column (db.String(100), nullable=False)
     lName = db.Column (db.String(100), nullable=False)
 <<<<<<< HEAD
+<<<<<<< HEAD
     mobile = db.Column (db.String(16), nullable=False)
     gender = db.Column (db.String(8))
     email = db.Column (db.String(100), unique=True)
@@ -266,6 +299,9 @@ class Doctor (User, db.Model):
         'polymorphic_identity': 'doctor'
     }
 =======
+=======
+    mobile = db.Column (db.String(16), nullable=False)
+>>>>>>> cc46499 (Authentication updated with new models and schemas')
     # gender = db.Column (db.String(8))
     # email = db.Column (db.String(100), unique=True)
     account = db.relationship (User, backref=db.backref('doctor_account'), uselist=False)
@@ -360,6 +396,7 @@ class Pharmacist (User, db.Model):
     fName = db.Column (db.String(100), nullable=False)
     lName = db.Column (db.String(100), nullable=False)
 <<<<<<< HEAD
+<<<<<<< HEAD
     mobile = db.Column (db.String(16), nullable=False)
     gender = db.Column (db.String(8))
     email = db.Column (db.String(100), unique=True)
@@ -370,6 +407,9 @@ class Pharmacist (User, db.Model):
         'polymorphic_identity': 'pharmacist'
     }
 =======
+=======
+    mobile = db.Column (db.String(16), nullable=False)
+>>>>>>> cc46499 (Authentication updated with new models and schemas')
     # gender = db.Column (db.String(8))
     # email = db.Column (db.String(100), unique=True)
     account = db.relationship (User, backref=db.backref('pharmacist_account'), uselist=False)

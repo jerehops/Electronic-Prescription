@@ -1,6 +1,11 @@
 from flask_wtf import FlaskForm
+<<<<<<< HEAD
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField, validators
 from wtforms.fields.html5 import TelField, DateField
+=======
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, DateField, SelectField, validators
+from wtforms.fields.html5 import TelField
+>>>>>>> cc46499 (Authentication updated with new models and schemas')
 
 from app.models import User
 
