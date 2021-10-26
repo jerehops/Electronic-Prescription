@@ -3,11 +3,7 @@ from flask_login import current_user, login_user, logout_user
 from app import db
 from app.auth import bp
 from app.models import User, Patient
-<<<<<<< HEAD
 from app.auth.forms import LoginForm, PatientRegisterForm, PatientMedicationProfileForm, LogOutConfirmationForm
-=======
-from app.auth.forms import LoginForm, PatientRegisterForm, PatientMedicationProfileForm
->>>>>>> cc46499 (Authentication updated with new models and schemas')
 
 
 @bp.route ("/login", methods=["GET", "POST"])
@@ -72,7 +68,6 @@ def register ():
             error = 'User already exists with email'
             return render_template ('auth/register.html', form=form, error=error)
         print ('successful register!')
-<<<<<<< HEAD
         patient = Patient (
             username=form.username.data,
             role='patient',
@@ -84,12 +79,6 @@ def register ():
             gender=form.gender.data
         )
         patient.set_password(form.password.data)
-=======
-        user = User (username=form.username.data, role='patient')
-        user.set_password(form.password.data)
-        user.save()
-        patient = Patient (fName=form.fName.data, lName=form.lName.data, mobile=form.mobile.data, account=user)
->>>>>>> cc46499 (Authentication updated with new models and schemas')
         patient.save()
         flash ('Welcome, {}. Please log in.'.format(form.lName.data))
         return redirect(url_for('auth.login'))
