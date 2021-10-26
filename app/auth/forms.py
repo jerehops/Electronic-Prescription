@@ -1,11 +1,6 @@
 from flask_wtf import FlaskForm
-<<<<<<< HEAD
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField, validators
-from wtforms.fields.html5 import TelField, DateField
-=======
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, DateField, SelectField, validators
 from wtforms.fields.html5 import TelField
->>>>>>> cc46499 (Authentication updated with new models and schemas')
 
 from app.models import User
 
@@ -14,26 +9,7 @@ class AdminCreateUserForm (FlaskForm):
     """
     : Form for admin to create new users
     """
-<<<<<<< HEAD
-    user_role = SelectField("User Role", choices=[
-        "Admin",
-        "Doctor",
-        "Pharmacist"
-    ])
     username = StringField ("Username", validators=[
-        validators.DataRequired(),
-        validators.Length(min=4)
-    ])
-    fName = StringField ("First Name", validators=[
-        validators.DataRequired()
-    ])
-    lName = StringField ("Last Name", validators=[
-        validators.DataRequired()
-    ])
-    email = StringField ("Email Address", validators=[
-=======
-    username = StringField ("Username", validators=[
->>>>>>> eb33ede (Database Model and Schemas Updated)
         validators.DataRequired(),
         validators.Length(max=20)
     ])
