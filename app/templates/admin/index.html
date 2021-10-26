@@ -1,0 +1,8 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+    <h3>Admin Home</h3>
+    <a class="btn btn-primary my-5" href="{{ url_for('user.index') }}">Manage Users</a>
+  </div>
+{% endblock %}
