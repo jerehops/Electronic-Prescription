@@ -7,41 +7,12 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 class User (UserMixin, db.Model):
-<<<<<<< HEAD
-    """
-    : Base User Model and Schema for Admin, Doctor, Patient, Pharmacist
-    """
-    __tablename__ = 'user'
-    id = db.Column (db.Integer, primary_key=True)
-    username = db.Column (db.String(20), unique=True, nullable=False)
-    password = db.Column (db.String(50), nullable=False)
-    role = db.Column (db.String(10))
-    activated = db.Column (db.Boolean, default=False)
-
-    __mapper_args__ = {
-        'polymorphic_identity' : 'user',
-        'polymorphic_on' : role
-    }
-
-    def __repr__(self):
-        return '[User] id: {}, username: {}'.format(self.id, self.username)
-
-    def __call__(self):
-        return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email,
-            'role': self.role,
-            'status': self.activated
-        }
-=======
     __tablename__ = 'user'
     id = db.Column (db.Integer, primary_key=True)
     username = db.Column (db.String(20), unique=True)
     password = db.Column (db.String(50))
     role = db.Column (db.String(10))
     activated = db.Column (db.Boolean, default=False)
->>>>>>> eb33ede (Database Model and Schemas Updated)
 
     def __repr__(self):
         return '<User> id: {}, username: {}'.format(self.id, self.username)
@@ -64,62 +35,6 @@ class User (UserMixin, db.Model):
         """
         : Add user to database
         """
-<<<<<<< HEAD
-        print ('registering new user', self)
-        db.session.add(self)
-        db.session.commit()
-
-    def get_role (self):
-        return self.role
-
-
-    def update_user(self, updated_user):
-        self.username = updated_user['username']
-        self.email = updated_user['email']
-        self.role = updated_user['role']
-        self.activated = True if updated_user['status'] == 'active' else False
-        db.session.commit()
-
-
-    @classmethod
-    def delete_user_by_id(cls, id):
-        try:
-            cls.query.filter_by(id=id).delete()
-            # db.session.delete(user)
-            db.session.commit()
-        except Exception as e:
-            raise(e)
-
-
-    def delete_user(self):
-        db.session.delete(self)
-        db.session.commit()
-
-
-    def get_account_status(self):
-        return 'active' if self.activated else 'inactive'
-
-
-    @classmethod
-    def get_user_by_username (cls, username: str) -> object:
-        """
-        # Get User Object by username
-        """
-        return cls.query.filter_by(username=username).frist()
-
-
-    @classmethod
-    def get_user_by_id (cls, id):
-        """
-        # Get user by id
-        """
-        return cls.query.filter_by(id=id).first()
-
-    @classmethod
-    def get_all_users (cls):
-        return cls.query.all()
-
-=======
         db.session.add(self)
         db.session.commit()
 
@@ -130,7 +45,6 @@ class User (UserMixin, db.Model):
         """
         return cls.query.filter_by(username=username).frist()
 
->>>>>>> cc46499 (Authentication updated with new models and schemas')
 
 @login.user_loader
 def load_user(id: int) -> object:
@@ -140,11 +54,7 @@ def load_user(id: int) -> object:
     return User.query.get (id)
 
 
-<<<<<<< HEAD
-class Patient (User):
-=======
 class Patient (User, db.Model):
->>>>>>> eb33ede (Database Model and Schemas Updated)
     __tablename__ = 'patient'
     pat_id = db.Column (db.Integer, primary_key=True)
     fName = db.Column (db.String(100))
