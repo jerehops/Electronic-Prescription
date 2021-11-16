@@ -41,7 +41,7 @@ def create_get_prescriptions():
                 error='Invalid Patient Data'
                 return jsonify({'message' : error})
 
-            prepare_new_prescription_email(patient, prescription.pres_id)
+            prepare_new_prescription_email(patient, prescription.identifier)
             flash ('New Prescription Created!')
             return redirect(url_for('doctor.index'))
         return render_template('prescription/create_prescriptions.html')
@@ -85,6 +85,7 @@ def get_medicines():
 @login_required
 def get_prescription_by_id(id):
     try:
+        form = TokenIDForm()
         p = Prescription.query.filter_by(pres_id=id).first()
         doctor = Doctor.get_doctor_by_acc_id(p.doc_id)
         pharmacist = Pharmacist.get_pharmacist_by_acc_id(p.phar_id)
@@ -96,6 +97,7 @@ def get_prescription_by_id(id):
         qr_link = 'http://127.0.0.1:5000/prescription/{}'.format(id)
         if request.method == "POST":
             dispense_prescription(id)
+            return redirect(url_for('pharmacist.index', form=form))
         return render_template(
             'prescription/view_prescription.html',
             prescription=p(),
@@ -119,6 +121,7 @@ def get_prescription_by_id(id):
 @bp.route('/prescription-qr/<id>')
 def get_prescription_from_qr (id):
     try:
+        form = TokenIDForm()
         p = Prescription.query.filter_by(pres_id=id).first()
         doctor = Doctor.get_doctor_by_acc_id(p.doc_id)
         pharmacist = Pharmacist.get_pharmacist_by_acc_id(p.phar_id)
@@ -130,6 +133,7 @@ def get_prescription_from_qr (id):
         qr_link = 'http://127.0.0.1:5000/prescription-qr/{}'.format(id)
         if request.method == "POST":
             dispense_prescription(id)
+            return redirect(url_for('pharmacist.index', form=form))
         return render_template(
             'prescription/view_prescription_via_qr.html',
             prescription=p(),
@@ -159,7 +163,6 @@ def dispense_prescription(id):
     try:
         db.session.commit()
         flash ('Prescription Dispensed')
-        return redirect(url_for('pharmacist.index', form=form))
     except Exception as e:
         flash ('Error Encountered Viewing Prescription, {}'.format(str(e)))
         return redirect(url_for('pharmacist.index', form=form))

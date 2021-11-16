@@ -21,6 +21,5 @@ def prepare_new_prescription_email (patient, pres_id):
     subject = '[Electronic Prescription] New Prescription Issued'
     recipient = patient.email
     fullname = '{} {}'.format(patient.fName, patient.lName)
-    url = 'http://127.0.0.1:5000//prescription-qr/{}'.format(pres_id)
-    body = render_template('prescription/email.html', patient=fullname, url=url)
+    body = render_template('prescription/email.html', patient=fullname, pres_id=pres_id)
     send_prescription_email(subject, recipient, body)

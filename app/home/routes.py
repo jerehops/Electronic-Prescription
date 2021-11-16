@@ -103,19 +103,19 @@ def edit_profile():
             data = form_data_to_dict (form.username.data, form.email.data, form.fName.data, form.lName.data, form.activated.data)
             if validate_request(data):
                 if current_user.get_role() == 'admin':
-                    admin = Admin.update_admin(current_user.id, data)
+                    admin = Admin.update_admin_profile(current_user.id, data)
                 elif not validate_mobile_number (form.mobile.data):
                     error = "Mobile number must be 8 numbers long"
                     return render_template ('home/edit_profile.html', form=form, error=error)
                 elif current_user.get_role() == 'doctor':
                     data['mobile'] = form.mobile.data
-                    doctor = Doctor.update_doctor(current_user.id, data)
+                    doctor = Doctor.update_doctor_profile(current_user.id, data)
                 elif current_user.get_role() == 'patient':
                     data['mobile'] = form.mobile.data
-                    patient = Patient.update_patient(current_user.id, data)
+                    patient = Patient.update_patient_profile(current_user.id, data)
                 elif current_user.get_role() == 'pharmacist':
                     data['mobile'] = form.mobile.data
-                    pharmacist = Pharmacist.update_pharmacist(current_user.id, data)
+                    pharmacist = Pharmacist.update_pharmacist_profile(current_user.id, data)
                 flash('Profile Updated Successfully')
                 return redirect(url_for('home.profile'))
 
@@ -129,7 +129,7 @@ def edit_profile():
         return render_template ('home/edit_profile.html', form=form, error='Internal Server Error: {}'.format(str(ke)))
     except AttributeError as ae:
         print('Exception occured during profile update. Attribute Error: {}'.format(str(ae)))
-        return render_tempalte ('home/edit_profile.html', form=form, error='Internal Server Error: {}'.format(str(ae)))
+        return render_template ('home/edit_profile.html', form=form, error='Internal Server Error: {}'.format(str(ae)))
     except Exception as e:
         print('Exception occured during profile update. Error: {}'.format(str(e)))
         return render_template ('home/edit_profile.html', form=form, error='Internal Server Error: {}'.format(str(e)))

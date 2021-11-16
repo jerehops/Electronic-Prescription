@@ -209,7 +209,7 @@ class Patient (User):
     @classmethod
     def delete_patient(cls, acc_id):
         try:
-            patient = cls.query.filter_by(acc_id=acc_id).delete()
+            patient = cls.query.filter_by(acc_id=acc_id).first()
             db.session.delete(patient)
             db.session.commit()
         except Exception as e:

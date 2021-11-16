@@ -288,13 +288,13 @@ class AdminUserView(MyAdminView):
         # Update user based on the user role
         """
         if role == 'admin':
-            return Admin.update_admin(id, data)
+            return Admin.update_admin_profile(id, data)
         elif role == 'doctor':
-            return Doctor.update_doctor(id, data)
+            return Doctor.update_doctor_profile(id, data)
         elif role == 'patient':
-            return Patient.update_patient(id, data)
+            return Patient.update_patient_profile(id, data)
         elif role == 'pharmacist':
-            return Pharmacist.update_pharmacist(id, data)
+            return Pharmacist.update_pharmacist_profile(id, data)
         raise Exception('Unkown User Role')
 
 
