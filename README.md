@@ -5,37 +5,38 @@
 **Prerequisites**
 - Python3
 - [pip](https://pip.pypa.io/en/stable/installation/)
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [VirtualEnv](https://virtualenv.pypa.io/en/latest/installation.html#via-pip)
-### Windows
-- mkdir E_Prescription
-- cd E_Prescription
-- `git clone https://github.com/lazyKT/Electronic-Prescription.git`
-- python3 -m venv venv
-- .\venv\Scripts\activate.bat
-- pip install -r requirement.txt
-### Unix
-- mkdir E_Prescription
-- cd E_Prescription
-- `git clone https://github.com/lazyKT/Electronic-Prescription.git`
-- python3 -m venv venv
-- source venv/bin/activate
-- pip install -r requirement.txt
+- [Latest Application](https://github.com/jerehops/Electronic-Prescription)
 
-## How to start development server
-### For Windows
-- cd E_Prescription
-- .\venv\Scripts\activate.bat
-- set FLASK_APP=wsgi.py
-- set FLASK_ENV=development
-- set E_PRESC_SENDGRID_API_KEY=<api-key>
-- flask run
-### For Unix Systems
-- cd E_Prescription
-- source venv/bin/activate
-- export FLASK_APP=wsgi.py
-- export FLASK_ENV=development
-- export E_PRESC_SENDGRID_API_KEY=<api-key>
-- flask run
+## Windows
+### Installing prerequistes
+- Open your command prompt
+- Change directory to Electronic-Prescription
+- Run command 'python3 -m venv venv' (To create a virtual environment)
+- Run command '.\venv\Script\activate.bat' (To enter virtual environment)
+- Run command 'pip install -r requirement.txt' (To install all the dependencies)
 
+### Setting up application
+- Run command 'set FLASK_APP=wsgi.py'
+- Run command 'set FLASK_ENV=development'
+- Run command 'set E_PRESC_SENDGRID_API_KEY=<API-KEY>' (API key not included. Please request from project members)
+- Run command 'flask run'
+  
 *Then run, http://127.0.0.1:5000 on browser*
+
+## Unix
+### Installing prerequistes
+- Open your command prompt
+- Change directory to Electronic-Prescription
+- Run command 'python3 -m venv venv' (To create a virtual environment)
+- Run command 'source venv/bin/activate' (To enter virtual environment)
+- Run command 'pip install -r requirement.txt' (To install all the dependencies)
+  
+### Setting up application
+- Run command 'export FLASK_APP=wsgi.py'
+- Run command 'export FLASK_ENV=development'
+- Run command 'export E_PRESC_SENDGRID_API_KEY=<API-KEY>' (API key not included. Please request from project members)
+- Run command 'flask run'
+  
+*Then run, http://127.0.0.1:5000 on browser* 
+
