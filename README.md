@@ -19,7 +19,8 @@
 ### Setting up application
 - Run command 'set FLASK_APP=wsgi.py'
 - Run command 'set FLASK_ENV=development'
-- Run command 'set E_PRESC_SENDGRID_API_KEY=<API-KEY>' (API key not included. Please request from project members)
+- Run command 'set E_PRESC_SENDGRID_API_KEY=API-KEY' (API key not included. Please request from project members)
+- Run command 'python dummy-data.py' (Script to generate dummy Data)
 - Run command 'flask run'
   
 *Then run, http://127.0.0.1:5000 on browser*
@@ -35,7 +36,8 @@
 ### Setting up application
 - Run command 'export FLASK_APP=wsgi.py'
 - Run command 'export FLASK_ENV=development'
-- Run command 'export E_PRESC_SENDGRID_API_KEY=<API-KEY>' (API key not included. Please request from project members)
+- Run command 'export E_PRESC_SENDGRID_API_KEY=API-KEY' (API key not included. Please request from project members)
+- Run command 'python dummy-data.py' (Script to generate dummy Data)
 - Run command 'flask run'
   
 *Then run, http://127.0.0.1:5000 on browser* 
